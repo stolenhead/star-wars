@@ -1,0 +1,22 @@
+{
+  "name": "star-wars",
+  "version": "1.0.0",
+  "description": "wab ",
+  "main": "index.js",
+  "scripts": {
+    "test": "\u001b[A\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[A\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001beb star wars server.js\u001b[B"
+  },
+  "repository": {
+    "type": "git",
+    "url": "\u0016https://github.com/stolenhead/star-wars.git"
+  },
+  "keywords": [
+    "web",
+    "ajax"
+  ],
+  "author": "Andrea Cabrera",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.14.0"
+  }
+}
