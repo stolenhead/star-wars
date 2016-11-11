@@ -1,4 +1,4 @@
-var plantilla= ' <option class="opcion-especie" value="_valor_" _familia_</option>';
+var plantilla= '  <option  data-species-url="{{ur}}">{{nombre-especies}}</option>';
 var plantilla2='<div class="col s12 m4">' +
 		    '<div class="card horizontal hoverable">' +
 		      	'<div class="card-stacked">' +
@@ -16,24 +16,27 @@ $(document).ready(function(){
 	$.getJSON("http://swapi.co/api/species/",function(response){
 		var especies = "";
 		$.each(response.results, function(i, especie){
-			var value ="";
-			var semiURL="http://swapi.co/api/people/";
-		$.each(especie.people, function(i, especie){
-		  value+=url.replace(semiURL,"");
-		});
 			especies+=plantilla
-			.replace("_familia_", especie.name);
-			.replace("_valor_",value.substring(0,value.length-1));
-		});
+			.replace("{{nombre-especies}}",especie.name)
+			.replace("{{ur}}",especie.people);
+	    });
+		$("#select").html('<option value="" disabled seleted>ESPECIE</option>');
 		$("#select").append(especies);
-});
-});
-$(".container").on("change","#select",function(){
-	var numeroURL =$(this).val().split("/");
-	for(var i=0;i<numeroURL.length;i++){
-		$.getJSON("http://swapi.co/api/people/"+numeroURL[i]+"/",function(response){
-      var plantillaLlena=plantilla2.replace("_name_",response.name);
-      $("#contenedor").append(plantillaLlena);
+	});
+		$("#select").change(function(e){
+			var optionArray =$("option");
+			for(var i =1 ; i< optionArray.length; i++){
+				var data = optionArray[i].getAttribute("data-species-url");
+				var split = data.split(",");
+				for(var a =0; a<split.length;a++){
+					var specie_data =split[a];
+					$.getJSON( specie_data,function(response){
+						var especie_vacia="";
+						especie_vacia+= plantilla2.replace("{{name}}",response.name);
+						$("#people").append(especie_vacia)
+					});
+				}
+			}
 		});
-	};
 });
+
