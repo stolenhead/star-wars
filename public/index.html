@@ -1,49 +1,30 @@
 <!DOCTYPE html>
-<html>
-<head>
-	<meta charset="utf-8">
-	<title>SWAPI Client</title>
-	<!-- Compiled and minified CSS -->
-  	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.min.css">
-  	<link rel="stylesheet" type="text/css" href="css/index.css">
-</head>
-<body>
+     <html>
+         <head>
+             <meta charset="utf-8">
+             <title>STAR WARS </title>
 
-	<section class="container">
-		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-		<div>
-		  <h3>Total: <span id="total" class="total">##</span></h3>
-      <div class="row">
-			<a id="next" class="btn-floating btn-large waves-effect waves-light black right">
-				<i class="material-icons">skip_next</i>
-			</a>	
-			<a id="previous" class="btn-floating btn-large waves-effect waves-light black left">
-				<i class="material-icons">skip_previous</i>
-			</a>
-		</div>
-    <div class="input-field col s12">
-	    <select id="select">
-	      <option  data-species-url=""></option>
-	    </select>
-   </div>
-   <div id="people" class="row people">
-		<div class="col s12 m4">
-			    <div class="card horizontal hoverable">
-			    	<div class="card-stacked">
-			        	<div class="card-content amber white-text">
-			          		<p>Hi, my name is <strong>____</strong></p>
-			        	</div>
-				        <div class="card-action">
-				          	<a data-show-url="#" class="about">See more about me</a>
-				        </div>
-				    </div>
-		    	</div>
-		</div>    
-	</div>
-	</section>
-	<script   src="http://code.jquery.com/jquery-2.2.4.js"   integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI="   crossorigin="anonymous"></script>
-	<script type="text/javascript" src="js/materialize.min.js"></script>
-	<script type="text/javascript" src="js/especies.js"></script>
-	<!-- <script type="text/javascript" src="js/index.js"></script> -->
-</body>
+             <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.min.css">
+             <link href="//fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+             <link rel="stylesheet" href="css/index.css">
+
+         </head>
+         <body>
+             <section class="container">
+                 <div id="contenedor">
+                     <label class="lista">Lista de especies</label>
+                     <select id="especie" class="browser-default">
+                         <option value="0" disabled selected>Elige tu especie</option>
+                     </select>
+                 </div>
+                 <div id="people" class="row"> 
+                 </div>
+             </section>
+            <a href="index.html"  class="waves-effect waves-light indigo darken-4 btn inicio">INICIO</a>
+
+             <script src="//code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+
+             <script src="//cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js"></script>
+             <script type="text/javascript" src="js/especies.js"></script>
+     </body>
 </html>

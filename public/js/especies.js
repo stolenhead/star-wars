@@ -1,44 +1,53 @@
-var plantilla= '  <option  data-species-url="{{ur}}">{{nombre-especies}}</option>';
-var plantilla2='<div class="col s12 m4">' +
-		    '<div class="card horizontal hoverable">' +
-		      	'<div class="card-stacked">' +
-		        	'<div class="card-content amber white-text">' +
-		          		'<p>Hi, my name is <strong>{{name}}</strong></p>' +
-		        	'</div>' +
-			        '<div class="card-action">' +
-			          	'<a data-show-url="{{url}} class="about" >See more about me</a>' +
-			        '</div>' +
-			    '</div>' +
-	    	'</div>' +
-	  	'</div>';
+var template = '<div class="col s12 m6">' +
+                '<div class="card horizontal hoverable">' +
+                    '<div class="card-stacked">' +
+                        '<div class="card-content indigo darken-4 white-text">' +
+                            '<p>Hi, my name is <strong>{{name}}</strong></p>' +
+                        '</div>' +
+                        '<div class="card-action">' +
+                            '<a data-show-url="{{url}}" class="blue-text text-darken-2about">Detalle personaje</a>' +
+                        '</div>' +
+                    '</div>' +
+                '</div>' +
+            '</div>'; 
 
 $(document).ready(function(){
-	$.getJSON("http://swapi.co/api/species/",function(response){
-		var especies = "";
-		$.each(response.results, function(i, especie){
-			especies+=plantilla
-			.replace("{{nombre-especies}}",especie.name)
-			.replace("{{ur}}",especie.people);
-	    });
-		$("#select").html('<option value="" disabled seleted>ESPECIE</option>');
-		$("#select").append(especies);
-	});
-		$("#select").change(function(e){
-			var optionArray =$("option");
-			for(var i =1 ; i< optionArray.length; i++){
-				var data = optionArray[i].getAttribute("data-species-url");
-				var split = data.split(",");
-				for(var a =0; a<split.length;a++){
-					var specie_data =split[a];
-					$.getJSON( specie_data,function(response){
-						var especie_vacia="";
-						especie_vacia+= plantilla2.replace("{{name}}",response.name);
-						$("#people").append(especie_vacia)
-					});
-				}
-			}
-		});
+
+    var nombreEspecies = function(response){        
+        var especies  = "";
+        $.each(response.results, function(i, especie){
+            var posicion = "";
+            var urlEspecies = "https://swapi.co/api/people/";
+
+            $.each(especie.people, function (i, valor) {
+            posicion += valor.replace( urlEspecies, "").replace("/", ",");
+            }); 
+
+             $("#especie").append('<option value ="' + posicion.slice(0,-1) + '">' + especie.name + '</option>');
+
+        });
+    };
+    $.getJSON("https://swapi.co/api/species/", nombreEspecies);
+
+    var mostrarOpciones = function(response){
+        var especies = "";
+            especies = template.replace("{{name}}" , response.name)
+            $("#people").append(especies);
+                especies= "";    
+    };
+           
+
+    var mostrarPersonajes = function(response){
+        var arr = $(this).val();
+        var cadena = arr.split(",");
+        var longitud = cadena.length;
+        $("#people").html("");
+        for (var i = 0; i < longitud; i++) {
+            var urlEspecies = "https://" + cadena[i] + "/";
+            $.getJSON(urlEspecies,mostrarOpciones);
+        }
+    };             
+
+        $("#contenedor").on("change", ("#especie"), mostrarPersonajes);
+
 });
-
-
-
